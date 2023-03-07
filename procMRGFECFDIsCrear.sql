@@ -1,0 +1,57 @@
+USE [MRGFE]
+GO
+
+/****** Object:  StoredProcedure [dbo].[procMRGFECFDIsCrear]    Script Date: 27/02/2023 06:19:27 p. m. ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROC [dbo].[procMRGFECFDIsCrear]
+	@CFDIID varchar(50) = '' ,
+	@CFDIFOLIOFISCAL varchar(50) = '',
+	@CFDISERIE varchar(50) = '', 
+	@CFDIRSOCEMISOR varchar(500) = '', 
+	@CFDIRFCEMISOR varchar(50) = '',
+	@CFDIRSOCRECEPTOR varchar(500) = '',
+	@CFDIRFCRECEPTOR varchar(50) = '',	
+	@CFDIFECHA datetime = '19000101', 
+	@CFDITOTAL money = 0.0,
+	@CFDIEMAIL varchar (50) = '',
+	@CFDIESACTIVO varchar (50) = '',
+	@CFDIEMAILENVIADO bit = 0,
+	@CFDIPDF varbinary(max),
+	@CFDIXML varbinary(max),
+	@CFDIPROCESADO1PDF bit = 0,
+	@CFDIPROCESADO1XML bit = 0,
+	@CFDIURLPDF varchar (8000) = '',
+	@CFDIURLXML varchar (8000) = '',
+	@CFDIFECHAPROCESADOPDF datetime = '19000101',
+	@CFDIFECHAPROCESADOXML datetime = '19000101'
+AS
+	/* jme 20230209. Da de alta un CFDI derivado de los parametros del sp*/
+	INSERT INTO tblMRGFECFDIs 
+	VALUES( @CFDIID,
+			@CFDIFOLIOFISCAL,
+			@CFDISERIE, 
+			@CFDIRSOCEMISOR, 
+			@CFDIRFCEMISOR,
+			@CFDIRSOCRECEPTOR,
+			@CFDIRFCRECEPTOR,
+			@CFDIFECHA, 
+			@CFDITOTAL,
+			@CFDIEMAIL,
+			@CFDIESACTIVO,
+			@CFDIEMAILENVIADO,
+			@CFDIPDF,
+			@CFDIXML,
+			@CFDIPROCESADO1PDF,
+			@CFDIPROCESADO1XML,
+			@CFDIURLPDF,
+			@CFDIURLXML,
+			@CFDIFECHAPROCESADOPDF,
+			@CFDIFECHAPROCESADOXML);
+GO
+
+
